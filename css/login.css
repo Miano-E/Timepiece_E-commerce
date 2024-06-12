@@ -1,0 +1,126 @@
+/* Existing CSS imports */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+/* CSS variables */
+:root {
+    --light--color-200: #efe9f4;
+    --light--color-300: #0496ff;
+    --accent--color-300: #A40E4C;
+    --neutral--color-400: #006ba6;
+    --dark--color-700: #171d1c;
+    --ff-primary: "Roboto", sans-serif; 
+    --ff-accent: "Playfair Display", serif;
+}
+
+/* Container styles */
+.logincontainer, .signupcontainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 60%;
+    max-width: 70%;
+    margin: 4rem auto;
+}
+
+/* Responsive design */
+@media (max-width : 35em) {
+    .logincontainer, .signupcontainer {
+        width: 80%;
+        max-width: 100%;
+        margin-inline-end: 1rem;
+    }
+}
+
+/* Header styles */
+.logincontainer h2, .signupcontainer h1 {
+    text-align: center;
+    font-family: var(--ff-accent);
+    color: var(--dark--color-700);
+    margin: 2rem;
+}
+
+/* Label styles */
+.logincontainer label, .signupcontainer label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark--color-700);
+}
+
+/* Input styles */
+.logincontainer input[type="text"], 
+.logincontainer input[type="password"],
+.signupcontainer input[type="text"],
+.signupcontainer input[type="password"] {
+    width: calc(100% - 30px); /* Adjusted width to make room for the icon */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--neutral--color-400);
+    border-radius: 4px;
+    padding-right: 30px; /* Added padding to make room for the icon */
+}
+
+/* Checkbox styles */
+.logincontainer input[type="checkbox"], .signupcontainer input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Button styles */
+.logincontainer button, .signupcontainer button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--light--color-300);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.logincontainer button:hover, .signupcontainer button:hover {
+    background-color: #000;
+    color: var(--light--color-300);
+}
+
+/* Text styles */
+.logincontainer .check, .signupcontainer .check,
+.logincontainer .demo {
+    text-align: center;
+    margin-top: 15px;
+    color: var(--dark--color-700);
+}
+
+.logincontainer .check a, .signupcontainer .check a {
+    color: var(--accent--color-300);
+    text-decoration: none;
+}
+
+.logincontainer .check a:hover, .signupcontainer .check a:hover {
+    text-decoration: underline;
+}
+
+/* Error message styles */
+.logincontainer .error, .signupcontainer .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Password input container styles */
+.password-input-container {
+    position: relative;
+}
+
+.password-input-container input {
+    width: calc(100% - 30px); /* Adjusted width to make room for the icon */
+}
+
+.password-input-container i {
+    position: absolute;
+    top: 60%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--neutral--color-400);
+}

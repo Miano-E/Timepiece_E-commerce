@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+:root {
+    --light--color-200: #efe9f4;
+    --light--color-300: #0496ff;
+    --accent--color-300: #A40E4C;
+    --neutral--color-400: #006ba6;
+    --dark--color-700: #171d1c;
+    --ff-primary: "Roboto", sans-serif; 
+    --ff-accent: "Playfair Display", serif;
+}
+
+.contactcontainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 60%;
+    max-width: 70%;
+    margin: 4rem auto;
+}
+
+@media (max-width: 35em) {
+    .contactcontainer {
+        width: 80%;
+        max-width: 100%;
+        margin-inline-end: 1rem;
+    }
+}
+
+.contactcontainer h2 {
+    text-align: center;
+    font-family: var(--ff-accent);
+    color: var(--dark--color-700);
+    margin: 2rem;
+}
+
+.contactcontainer label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark--color-700);
+}
+
+.contactcontainer input[type="text"],
+.contactcontainer input[type="email"],
+.contactcontainer textarea {
+    width: calc(100% - 30px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--neutral--color-400);
+    border-radius: 4px;
+}
+
+.contactcontainer textarea {
+    resize: vertical;
+}
+
+.contactcontainer button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--light--color-300);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.contactcontainer button:hover {
+    background-color: #000;
+    color: var(--light--color-300);
+}
