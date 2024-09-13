@@ -1,5 +1,5 @@
 # Ignore the images folder in the root directory
-/images/js
+/images/
 
 # Ignore specific files
 add-product.php
