@@ -103,7 +103,6 @@ header {
     transform: none;
 }
 
-/* Mobile menu */
 .menu_icon {
     font-size: 2rem;
     cursor: pointer;
@@ -126,7 +125,6 @@ header {
     transition: opacity 2s ease-in-out;
 }
 
-/* Cart container */
 .cart-container {
     display: flex;
     align-items: center;
@@ -151,7 +149,6 @@ header {
     text-shadow: 0.1em 0.1em 0.15em #000;
 
 }
-
 
 
 #notification-container {
@@ -189,7 +186,7 @@ header {
 }
 
 
-/* Sidebar styles */
+/* Cart Sidebar styles */
 #cart-sidebar {
     position: fixed;
     top: 0;
@@ -198,12 +195,12 @@ header {
     height: 100%;
     background-color: #fff;
     box-shadow: -3px 0 8px rgba(0, 0, 0, 0.2);
-    transition: right 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* Same transition for both open and close */
+    transition: right 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: 1000;
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    will-change: right; /* Optimizes the transition */
+    will-change: right;
 }
 
 #cart-sidebar.open {
@@ -234,7 +231,7 @@ header {
 }
 
 #cart-total {
-    color: #000; /* Ensure the color is visible */
+    color: #000;
 }
 
 
@@ -284,7 +281,7 @@ header {
     background-color: #195b7a;
 }
 
-/* Sidebar item styles */
+/* Sidebar items styles */
 .cart-item {
     display: flex;
     align-items: center;
@@ -357,7 +354,7 @@ header {
     background-color: #fff;
     border: 1px solid #247ba0;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for a clean look */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: border 0.3s ease;
 }
 
@@ -403,11 +400,11 @@ header {
     .mobile_side_nav a {
         text-transform: uppercase;
         padding: 2px 8px 8px 32px;
-        text-decoration: none;  /* Ensure no underline */
+        text-decoration: none;
         font-size: 1rem;
         color: #000;
         display: block;
-        transition: opacity 0.3s; /* Only change opacity on hover */
+        transition: opacity 0.3s;
     }
     
     .mobile_side_nav a:hover {
@@ -432,19 +429,12 @@ header {
         margin: .8em;
     }
     
-    /* Menu and Close Icons */
     .menu_icon, .close {
         display: block;
         cursor: pointer;
         font-size: 2rem;
         z-index: 2000;
     }
-
-    /* .close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-    } */
 
     nav.open {
         right: 0;
@@ -492,179 +482,3 @@ header {
         margin-left: .8em;
     }
 }
-
-
-
-/* Mobile styles
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: var(--light--color-200);
-    font-family: var(--ff-primary);
-}
-
-header .logo {
-    font-size: 1.5rem;
-    color: var(--dark--color-700);
-    text-decoration: none;
-    font-family: var(--ff-primary);
-    font-weight: bold;
-}
-
-header .logo span {
-    color: var(--accent--color-300);
-}
-
-.hamburger {
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: block;
-}
-
-nav {
-    position: fixed;
-    top: 0;
-    right: -250px;
-    width: 250px;
-    height: 100%;
-    background-color: var(--light--color-200);
-    transition: right 0.3s ease;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    padding-top: 2rem;
-    z-index: 1000;
-}
-
-nav .close {
-    font-size: 2.2rem;
-    cursor: pointer;
-    position: absolute;
-    top: 0.3rem;
-    right: 1.2rem;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-left: 1rem;
-    margin-top: 2rem;
-}
-
-nav ul li {
-    margin: 0;
-}
-
-nav ul li a {
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--dark--color-700);
-    font-size: 1rem;
-    padding: 0.5rem 5rem;
-    transition: color 0.3s, background-color 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    color: black;
-    background-color: var(--light--color-300);
-    border-radius: 5px;
-}
-
-nav ul li a.login {
-    color: var(--light--color-300);
-    border-radius: 5px;
-    padding: 0.5rem 5rem;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-nav ul li a.login:hover {
-    background-color: var(--dark--color-700);
-    color: #fff;
-}
-
-@media (min-width: 40em) {
-    .hamburger {
-        display: none;
-    }
-    
-    .close {
-        display: none;
-    }
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: var(--light--color-200);
-    }
-    
-    header .logo {
-        margin-left: 5rem;
-        font-size: 1.5rem;
-        color: var(--dark--color-700);
-        text-decoration: none;
-        font-family: var(--ff-primary);
-    }
-    
-    header .logo span {
-        color: var(--accent--color-300);
-    }
-    
-    header nav {
-        position: static;
-        width: auto;
-        height: auto;
-        background-color: transparent;
-        box-shadow: none;
-        padding-top: 0;
-        display: flex;
-        align-items: center;
-    }
-    
-    header nav ul {
-        list-style: none;
-        display: flex;
-        gap: 1rem;
-        flex-direction: row;
-        padding-left: 0;
-        margin-top: 0;
-    }
-    
-    header nav ul li a {
-        text-decoration: none;
-        color: var(--dark--color-700);
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        transition: color 0.3s, background-color 0.3s;
-    }
-    
-    header nav ul li a:hover,
-    header nav ul li a.active {
-        color: var(--light--color-300);
-        background-color: black;
-        border-radius: 5px;
-    }
-    
-    header nav ul li a.login {
-        background-color: var(--light--color-300);
-        color: #000;
-        border-radius: 5px;
-        padding: 0.5rem 1rem;
-        transition: background-color 0.3s, color 0.3s;
-    }
-    
-    header nav ul li a.login:hover {
-        background-color: var(--dark--color-700);
-        color: var(--light--color-300);
-    }
-}
-
-nav.open {
-    right: 0;
-}  */
