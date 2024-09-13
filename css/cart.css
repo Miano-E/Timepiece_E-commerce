@@ -38,8 +38,8 @@ section {
 
 .item-details {
     flex: 1;
-    margin-left: 0.5rem; /* Reduce margin-left */
-    max-width: 60%; /* Limit the width of item details */
+    margin-left: 0.5rem;
+    max-width: 60%;
 }
 
 .item-details .item-name {
@@ -56,14 +56,14 @@ section {
 
 /* Updated styling for the quantity selector */
 .item-quantity {
-    display: inline-flex; /* Change to inline-flex to prevent the flexbox from extending too far */
+    display: inline-flex;
     align-items: center;
     justify-content: space-between;
     border: 1px solid #247ba0;
     border-radius: 6px;
     padding: 0.1em 0.3em;
     background-color: #f9f9f9;
-    width: fit-content; /* Ensure it wraps around its contents */
+    width: fit-content; 
 }
 
 /* Keep the same styling for quantity buttons and display */
@@ -121,9 +121,6 @@ section {
 
 
 
-
-
-
 @media(max-width: 35em) {
     .cart-item {
         flex-direction: column;
@@ -145,37 +142,4 @@ section {
         font-size: 1rem;
     }
 }
-/* .breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    list-style: none;
-    background-color: #e9ecef;
-    border-radius: 0.25rem;
-}
-
-.breadcrumb-item {
-    display: flex;
-    align-items: center;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-    content: "/";
-    padding: 0 0.5rem;
-    color: #6c757d;
-}
-
-.breadcrumb-item a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.breadcrumb-item a:hover {
-    text-decoration: underline;
-}
-
-.breadcrumb-item.active {
-    color: #6c757d;
-} */
 
