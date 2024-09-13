@@ -70,7 +70,7 @@
 }
 
 .quantity-btn:hover {
-    background-color: #1a5e79; /* Darker shade on hover */
+    background-color: #1a5e79;
 }
 
 /* Styling the quantity display */
@@ -117,7 +117,6 @@
 }
 
 
-
 .related-products-container {
     max-width: 78%;
     margin: 0 auto;
@@ -136,12 +135,6 @@
 }
 
 
-/* .related-product-img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-} */
-
 @media(max-width: 35em) {
     .product-details {
         flex-direction: column;
@@ -151,5 +144,3 @@
         width: 100%;
     }
 }
-
-/* The only problem with this randomization approach is that everytime a user loads the page the order changes, even in the slightest like going to the next page, the order changes too much, isn't there a way that we can sort of have a fixed order maybe trhough math functions, a logic that won't change the order every time a user loads the page to bring some 'stillness' to the current order state */
