@@ -1,11 +1,9 @@
-/* Container for contact form */
 .contact {
     width: 60%;
     max-width: 700px;
     margin: 4rem auto;
 }
 
-/* Title styling */
 .contact h2 {
     font-size: 1.8rem;
     color: #000;
@@ -13,7 +11,6 @@
     margin-bottom: 1em;
 }
 
-/* Form layout */
 form {
     display: flex;
     flex-direction: column;
@@ -66,12 +63,10 @@ form button:hover {
     background-color: #195a74;
 }
 
-/* Textarea styling */
 .contact textarea {
     resize: vertical;
 }
 
-/* Dropdown (select) styling */
 form select {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -90,7 +85,6 @@ form select:focus {
     border-color: #247ba0;
 }
 
-/* General message styling */
 .message {
     padding: .8em;
     margin-top: .8em;
@@ -103,14 +97,12 @@ form select:focus {
     transition: opacity 0.5s ease;
 }
 
-/* Success message */
 .message.success {
     background-color: #dff0d8;
     color: #1c561d;
     border: 1px solid #3c763d;
 }
 
-/* Error message */
 .message.error {
     background-color: #f2dede;
     color: #a52825;
