@@ -1,28 +1,29 @@
 <?php
-session_start();
+include 'includes/header.php';
+
 
 if (isset($_POST['submit'])) {
 
     date_default_timezone_set('Africa/Nairobi');
 
     // Access token
-    $consumerKey = 'nk16Y74eSbTaGQgc9WF8j6FigApqOMWr'; 
-    $consumerSecret = '40fD1vRXCq90XFaU'; 
+    $consumerKey = 'nk16Y74eSbTaGQgc9WF8j6FigApqOMWr';
+    $consumerSecret = '40fD1vRXCq90XFaU';
 
     // Define the variables
     $BusinessShortCode = '174379';
-    $Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';  
+    $Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
 
-    $PartyA = $_POST['phone']; 
+    $PartyA = $_POST['phone'];
     $AccountReference = '2255';
     $TransactionDesc = 'Test Payment';
-    $Amount = intval($_POST['amount']); 
+    $Amount = intval($_POST['amount']);
 
     // Get the timestamp, format YYYYmmddhms
-    $Timestamp = date('YmdHis');    
+    $Timestamp = date('YmdHis');
 
     // Get the base64 encoded string -> $password
-    $Password = base64_encode($BusinessShortCode.$Passkey.$Timestamp);
+    $Password = base64_encode($BusinessShortCode . $Passkey . $Timestamp);
 
     // Header for access token
     $headers = ['Content-Type:application/json; charset=utf8'];
@@ -32,27 +33,27 @@ if (isset($_POST['submit'])) {
     $initiate_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
     // Callback url
-    $CallBackURL = 'https://361e-41-209-60-94.ngrok-free.app/callback_url.php';  
+    $CallBackURL = 'https://361e-41-209-60-94.ngrok-free.app/callback_url.php';
 
     // Get access token
     $curl = curl_init($access_token_url);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
     curl_setopt($curl, CURLOPT_HEADER, FALSE);
-    curl_setopt($curl, CURLOPT_USERPWD, $consumerKey.':'.$consumerSecret);
+    curl_setopt($curl, CURLOPT_USERPWD, $consumerKey . ':' . $consumerSecret);
     $result = curl_exec($curl);
     $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     $result = json_decode($result);
-    $access_token = $result->access_token;  
+    $access_token = $result->access_token;
     curl_close($curl);
 
     // Header for stk push
-    $stkheader = ['Content-Type:application/json','Authorization:Bearer '.$access_token];
+    $stkheader = ['Content-Type:application/json', 'Authorization:Bearer ' . $access_token];
 
     // Initiating the transaction
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $initiate_url);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $stkheader); // Setting custom header
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $stkheader);
 
     $curl_post_data = array(
         'BusinessShortCode' => $BusinessShortCode,
@@ -107,117 +108,111 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TimePiece - Checkout</title>
-    <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/check.css">
 </head>
+
 <body>
-    <header>
-        <a href="index.php" class="logo">Time<span>Piece</span></a>
-        <div class="hamburger" id="hamburger">
-            &#9776;
-        </div>
 
-        <nav id="nav-menu">
-            <div class="close" id="close">
-                &times;
-            </div>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="shop.php">Shop</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <?php if (isset($_SESSION['username'])) { ?>
-                    <li><a href="logout.php" class="login">Logout</a></li>
-                <?php } else { ?>
-                    <li><a href="login.php" class="login">Login</a></li>
-                <?php } ?>
-            </ul>
-        </nav>
-    
-    </header>
-    <?php include 'user_info.php'; ?>
 
-    <!-- Breadcrumb Navigation -->
-    <ul class="breadcrumb">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="shop.php">Shop</a></li>
-        <li> <a href="cart.php">View Cart</a></li>
-        <li>Checkout</li>
-    </ul>
+    <section>
+        <div class="container">
+            <h2 class="text-center checkout-title">Checkout</h2>
+            <a href="cart.php" class="cta-btn btn-secondary return-cart-btn">
+                <span class="btn-text">Return to Cart</span>
+            </a>
+            <div class="checkout-split">
+                <div class="order-summary" id="order-summary">
+                    <h3 class="order-title">Order Summary</h3>
+                    <!-- Order summary will be populated by JavaScript -->
 
-    <div class="container">
-        <h2 class="text-center checkout-title">Checkout</h2>
+                </div>
+                <div class="payment-section">
+                    <h3 class="text-center form-title">Payment</h3>
+                    <?php if ($user_message): ?>
+                        <div class="alert <?php echo (strpos($user_message, 'Success') !== false) ? 'alert-success' : 'alert-error'; ?>">
+                            <?php echo $user_message; ?>
+                            <!-- <span class="close-btn">&times;</span> -->
+                        </div>
+                    <?php endif; ?>
 
-        <div class="checkout-split">
-            <div class="order-summary" id="order-summary">
-                <h3 class="order-title">Order Summary</h3>
-                <!-- Order summary will be populated by JavaScript -->
-            </div>
-            <div class="payment-section">
-                <h3 class="form-title">Payment</h3>
-                <?php if ($user_message): ?>
-                    <div class='alert alert-info'><?php echo $user_message; ?></div>
-                <?php endif; ?>
-                <form action="check.php" method="POST">
-                    <label for="amount">Amount</label>
-                    <input type="text" id="amount" name="amount" readonly>
-                    <label for="phone">Phone Number</label>
-                    <input type="text" id="phone" name="phone" placeholder="254700000000" required>
-                    <button type="submit" class="btn btn-success" name="submit" value="submit">Checkout</button>
-                </form>
+                    <form action="check.php" method="POST">
+                        <label for="amount">Amount</label>
+                        <input type="text" id="amount" name="amount" readonly>
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="254700000000" required>
+                        <button type="submit" class="cta-btn btn-success" name="submit" value="submit"> <span class="btn-text">Checkout</span></button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+
+    <?php include 'includes/footer.php'; ?>
+
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Hamburger menu functionality
-        document.getElementById('hamburger').addEventListener('click', function() {
-            document.getElementById('nav-menu').classList.add('open');
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger menu functionality
+            document.getElementById('hamburger').addEventListener('click', function() {
+                document.getElementById('nav-menu').classList.add('open');
+            });
 
-        document.getElementById('close').addEventListener('click', function() {
-            document.getElementById('nav-menu').classList.remove('open');
-        });
+            document.getElementById('close').addEventListener('click', function() {
+                document.getElementById('nav-menu').classList.remove('open');
+            });
 
-        const username = '<?php echo $username; ?>';
+            const username = '<?php echo $username; ?>';
 
-        function getCartKey(username) {
-            return `cart_${username || 'guest'}`;
-        }
-
-        const cart = JSON.parse(localStorage.getItem(getCartKey(username))) || [];
-        const totalAmount = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        document.getElementById('amount').value = Math.floor(totalAmount);
-
-        const orderSummaryContainer = document.getElementById('order-summary');
-        cart.forEach((item, index) => {
-            const itemElement = document.createElement('div');
-            itemElement.classList.add('order-item');
-            if (index < cart.length - 1) {
-                itemElement.classList.add('border-bottom');
+            function getCartKey(username) {
+                return `cart_${username || 'guest'}`;
             }
-            itemElement.innerHTML = `
+
+            const cart = JSON.parse(localStorage.getItem(getCartKey(username))) || [];
+            const totalAmount = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            document.getElementById('amount').value = Math.floor(totalAmount);
+
+            const orderSummaryContainer = document.getElementById('order-summary');
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('order-item');
+                if (index < cart.length - 1) {
+                    itemElement.classList.add('border-bottom');
+                }
+                itemElement.innerHTML = `
                 <img src="${item.image}" alt="${item.name}">
                 <div>
                     <p>${item.product_name}</p>
                     <p>Ksh ${item.price} x ${item.quantity}</p>
                 </div>
             `;
-            orderSummaryContainer.appendChild(itemElement);
+                orderSummaryContainer.appendChild(itemElement);
+            });
+
+            const totalElement = document.createElement('div');
+            totalElement.classList.add('total');
+            totalElement.textContent = `Total: Ksh ${totalAmount.toFixed(2)}`;
+            orderSummaryContainer.appendChild(totalElement);
+
+            const alert = document.querySelector('.alert');
+    
+            if (alert) {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.style.display = 'none', 500);
+                }, 3000); // 3 seconds
+            }
         });
 
-        const totalElement = document.createElement('div');
-        totalElement.classList.add('total');
-        totalElement.textContent = `Total: Ksh ${totalAmount.toFixed(2)}`;
-        orderSummaryContainer.appendChild(totalElement);
-    });
-</script>
+
+    </script>
 
 </body>
+
 </html>

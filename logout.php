@@ -17,7 +17,8 @@ if (isset($_SESSION['username'])) {
     // Store cart data in local storage before logout
     echo "<script>
         localStorage.setItem('cart_{$username}', JSON.stringify(" . json_encode($cart) . "));
-        window.location.href = 'shop.php';
+        const previousPage = '" . (isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : 'home.php') . "';
+        window.location.href = previousPage;
     </script>";
 }
 

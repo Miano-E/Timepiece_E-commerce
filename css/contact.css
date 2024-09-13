@@ -1,73 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-
-:root {
-    --light--color-200: #efe9f4;
-    --light--color-300: #0496ff;
-    --accent--color-300: #A40E4C;
-    --neutral--color-400: #006ba6;
-    --dark--color-700: #171d1c;
-    --ff-primary: "Roboto", sans-serif; 
-    --ff-accent: "Playfair Display", serif;
-}
-
-.contactcontainer {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+/* Container for contact form */
+.contact {
     width: 60%;
-    max-width: 70%;
+    max-width: 700px;
     margin: 4rem auto;
 }
 
-@media (max-width: 35em) {
-    .contactcontainer {
-        width: 80%;
-        max-width: 100%;
-        margin-inline-end: 1rem;
-    }
-}
-
-.contactcontainer h2 {
+/* Title styling */
+.contact h2 {
+    font-size: 1.8rem;
+    color: #000;
     text-align: center;
-    font-family: var(--ff-accent);
-    color: var(--dark--color-700);
-    margin: 2rem;
+    margin-bottom: 1em;
 }
 
-.contactcontainer label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--dark--color-700);
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F7FA;
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.contactcontainer input[type="text"],
-.contactcontainer input[type="email"],
-.contactcontainer textarea {
-    width: calc(100% - 30px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid var(--neutral--color-400);
+form label {
+    margin-bottom: 0.3em;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+textarea,
+form input, form button, form select {
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+form input, form select, textarea {
+    background-color: #fff;
+}
+
+form input:focus,
+textarea:focus,
+select:focus {
+    border-color: #247ba0;
+    outline: none;
+}
+
+form button {
+    background-color: #247ba0;
+    color: white;
+    border: none;
+    padding: 0.8em;
+    font-size: 1.2rem;
     border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.contactcontainer textarea {
+form button:hover {
+    background-color: #195a74;
+}
+
+/* Textarea styling */
+.contact textarea {
     resize: vertical;
 }
 
-.contactcontainer button {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--light--color-300);
-    color: #000;
-    border: none;
-    border-radius: 4px;
+/* Dropdown (select) styling */
+form select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 2.5em;
     cursor: pointer;
-    font-weight: bold;
+    transition: border-color 0.3s ease;
 }
 
-.contactcontainer button:hover {
-    background-color: #000;
-    color: var(--light--color-300);
+form select:hover,
+form select:focus {
+    border-color: #247ba0;
 }
+
+/* General message styling */
+.message {
+    padding: .8em;
+    margin-top: .8em;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+    width: 90%;
+    max-width: 700px;
+    margin: 1rem auto;
+    transition: opacity 0.5s ease;
+}
+
+/* Success message */
+.message.success {
+    background-color: #dff0d8;
+    color: #1c561d;
+    border: 1px solid #3c763d;
+}
+
+/* Error message */
+.message.error {
+    background-color: #f2dede;
+    color: #a52825;
+    border: 1px solid #a94442;
+}
+
+
+@media(max-width: 35em) {
+    .contact {
+        width: 97%;
+    }
+}
+
+

@@ -1,9 +1,9 @@
 <?php
-    // Include the connection file
+    include 'includes/header.php';
    include_once("connect.php");
 
+
    // Initialize variables to store form data
-   $fullName = "";
    $username = "";
    $email = "";
    $password = "";
@@ -13,7 +13,6 @@
    if(isset($_POST['register'])) {
 
     // Retrieve form data
-    $fullName = $_POST['fullName'];
     $username = trim($_POST['username']);
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -23,12 +22,6 @@
     $errors = array();
 
     //Validation of the input fields
-    if($fullName == "") {
-        $errors['fullName'] = "Full name field required";
-    }else if(preg_match("#[0-9]+#", $fullName)) {
-        $errors['fullName'] = "Name cannot contain numbers";
-    }
-
     if($username == "") {
         $errors['username'] = "Username field required";
     }else if(strlen($username) < 3) {
@@ -80,14 +73,12 @@
     if(empty($errors)) {
         $encpass = password_hash($password, PASSWORD_BCRYPT);
         
-        $stmt = $con->prepare("INSERT INTO ecommerce_table(fullName, username, email, password) VALUES (?, ?, ?, ?)");
-        $stmt -> bind_param("ssss", $fullName, $username, $email, $encpass);
+        $stmt = $con->prepare("INSERT INTO ecommerce_table(username, email, password) VALUES (?, ?, ?)");
+        $stmt -> bind_param("sss", $username, $email, $encpass);
 
         // Execute the query
         if($stmt->execute()) {
 
-            // Reset form fields and display success message
-            $fullName = "";
             $username = "";
             $email = "";
             $password = "";
@@ -97,8 +88,6 @@
         }else {
             echo "<script> alert('Failed to create') </script>";
         }
-        
-        // Close the statement and connection
         $stmt->close();
         $con->close();
     }
@@ -111,71 +100,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/login.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> 
+    <link rel="stylesheet" href="./css/form.css">
 </head>
 <body>
 
-    <header>
-        <a href="index.php" class="logo">Time<span>Piece</span></a>
-        <div class="hamburger" id="hamburger">
-            &#9776;
-        </div>
-        <nav id="nav-menu">
-            <div class="close" id="close">
-                &times;
+    <div class="signup_container">
+        <form action="" method="POST">
+            <h1 class="text-center">Create Account</h1>
+
+            <label for="username">Username</label>
+            <input type="text" name="username" value="<?php echo isset($username) ? $username : ''; ?>">
+            <p class="error"><?php if(isset($errors["username"])) echo $errors["username"]; ?></p>
+
+            <label for="email">Email</label>
+            <input type="text" name="email" value="<?php echo isset($email) ? $email : ''; ?>">
+            <p class="error"><?php if(isset($errors["email"])) echo $errors["email"]; ?></p>
+
+            <div class="password-input-container">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="id_password" value="<?php echo isset($password) ? $password : ''; ?>">
+                <i class="fas fa-eye-slash" id="togglePassword"></i>
             </div>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="shop.php">Shop</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php" class="login active">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+            <p class="error"><?php if(isset($errors['password'])) echo $errors['password']; ?></p>
 
-  <!-- Registration form section -->
-<div class="signupcontainer">
-    <form action="" method="POST">
-        <h1>Create Account</h1>
+            <div class="password-input-container">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="id_confirm_password" value="<?php echo isset($confirmPassword) ? $confirmPassword : ''; ?>">
+                <i class="fas fa-eye-slash password-toggle" id="toggleconfirmPassword"></i>
+            </div>
+            <p class="error"><?php if(isset($errors['confirmPassword'])) echo $errors['confirmPassword']; ?></p>
 
-        <label for="fullName">Full Name</label>
-        <input type="text" name="fullName" value="<?php echo isset($fullName) ? $fullName : ''; ?>">
-        <p class="error"><?php if(isset($errors["fullName"])) echo $errors["fullName"]; ?></p>
+            <button type="submit" name="register" class="submitbtn"><span class="btn-text">Create</span></button>
+            <p class="check">Already have an account? <a href="login.php"><span class="acc">Login</span></a></p>
+        </form>
+    </div>
 
-        <label for="username">Username</label>
-        <input type="text" name="username" value="<?php echo isset($username) ? $username : ''; ?>">
-        <p class="error"><?php if(isset($errors["username"])) echo $errors["username"]; ?></p>
+    <?php include 'includes/footer.php'; ?>
 
-        <label for="email">Email</label>
-        <input type="text" name="email" value="<?php echo isset($email) ? $email : ''; ?>">
-        <p class="error"><?php if(isset($errors["email"])) echo $errors["email"]; ?></p>
-
-        <div class="password-input-container">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="id_password" value="<?php echo isset($password) ? $password : ''; ?>">
-            <i class="fas fa-eye-slash" id="togglePassword"></i>
-        </div>
-        <p class="error"><?php if(isset($errors['password'])) echo $errors['password']; ?></p>
-
-        <div class="password-input-container">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" name="confirmPassword" id="id_confirm_password" value="<?php echo isset($confirmPassword) ? $confirmPassword : ''; ?>">
-            <i class="fas fa-eye-slash password-toggle" id="toggleconfirmPassword"></i>
-        </div>
-        <p class="error"><?php if(isset($errors['confirmPassword'])) echo $errors['confirmPassword']; ?></p>
-
-        <button type="submit" name="register" class="submitbtn">Create</button>
-        <p class="check">Already have an account? <a href="login.php">Login</a></p>
-    </form>
-</div>
-
-<script src="eye.js"></script>
-
-
-   <script src="eye.js"></script>
+    <script src="eye.js"></script>
 
 </body>
 </html>

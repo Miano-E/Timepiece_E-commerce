@@ -1,6 +1,5 @@
 <?php
 include("connect.php");
-session_start();
 
 header('Content-Type: application/json');
 

@@ -1,47 +1,7 @@
 <?php
-session_start();
+    session_start();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce Home</title>
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-<body>
-   
-    <header>
-        <a href="index.php" class="logo">Time<span>Piece</span></a>
-        <div class="hamburger" id="hamburger">
-            &#9776;
-        </div>
-    
-        <nav id="nav-menu">
-            <div class="close" id="close">
-                &times;
-            </div>
-            <ul>
-                <li><a href="index.php" class="active">Home</a></li>
-                <li><a href="shop.php">Shop</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <?php if (isset($_SESSION['username'])) { ?>
-                    <li><a href="logout.php" class="login">Logout</a></li>
-                <?php } else { ?>
-                    <li><a href="login.php" class="login">Login</a></li>
-                <?php } ?>
-            </ul>
-        </nav>
-        <div class="cart-container">
-            <a href="cart.php" class="cart-icon" id="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-quantity" id="cart-quantity">0</span>
-            </a>
-        </div>
-    </header>
+    <?php include 'includes/header.php'; ?>
     
     <?php include 'user_info.php'; ?>
 
@@ -59,13 +19,11 @@ session_start();
                     
                     </div>
                     <div class="right-col">
-                        <img src="./images/watches/watch (12).jpg" alt="Watch" class="hero-card-img">
+                        <img src="./uploaded-imgs/watch12.webp" alt="Watch" class="hero-card-img">
                     </div>
                 </div>
             </div>
         </section>
-        
-   
 
         <section>
             <!-- Product cards section -->
@@ -113,7 +71,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Watch</h4>
                             <h2 class="card-title">Black Smartwatch</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -123,7 +81,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Watch</h4>
                             <h2 class="card-title">Oyster Perpetual Datejust Watch</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -133,7 +91,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Watch</h4>
                             <h2 class="card-title">Grey Digital Wrist Watch</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -144,7 +102,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Light Solutions</h4>
                             <h2 class="card-title">Retro Light Bulb</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -154,7 +112,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Light Solutions</h4>
                             <h2 class="card-title">Pink Table Lamp</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -164,7 +122,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Light Solutions</h4>
                             <h2 class="card-title">Medical Torch Pen</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -175,7 +133,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Furniture</h4>
                             <h2 class="card-title">Wooden Chair &amp; Table</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -185,7 +143,7 @@ session_start();
                         <div class="card-content">
                             <h4 class="card-category">Furniture</h4>
                             <h2 class="card-title">Gray Padded Sofa Chair</h2>
-                            <p class="card-rating">★★★★☆</p>
+
                             <p class="card-price">Ksh 500</p>
                             <button class="add-to-cart-btn">Add To Cart</button>
                         </div>
@@ -216,9 +174,7 @@ session_start();
         </section>
 
 
-    <footer>
-        &copy; 2024 TimePiece. All Rights Reserved. 
-    </footer>
+    <?php include 'includes/footer.php'; ?>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

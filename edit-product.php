@@ -112,7 +112,7 @@ $conn->close();
         <select id="category" name="category_id" required>
             <option value="">Select Category</option>
             <?php
-            $conn = new mysqli("localhost", "root", "", "timepiece");
+            include("connection.php");
             $result = $conn->query("SELECT id, name FROM categories");
             while ($row = $result->fetch_assoc()) {
                 echo "<option value='" . $row['id'] . "' " . ($row['id'] == $category_id ? "selected" : "") . ">" . $row['name'] . "</option>";

@@ -1,0 +1,11 @@
+# Ignore the images folder in the root directory
+/images/js
+
+# Ignore specific files
+add-product.php
+connection.php
+e-commerce.sql
+edit-product.php
+index.php
+manage-products/
+update_product.php

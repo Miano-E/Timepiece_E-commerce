@@ -1,7 +1,10 @@
 <?php
-// Include the connection file and start the session
+include 'includes/header.php';
 include("connect.php");
-session_start();
+
+if (!isset($_SESSION['previous_page']) && isset($_SERVER['HTTP_REFERER'])) {
+    $_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'];
+}
 
 // Check if the form is submitted using POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_stmt_get_result($stmt);
         $row = mysqli_fetch_assoc($result);
 
-        // If password is correct, create a session and redirect to checkout
+        // If password is correct, create a session and redirect to previous page or checkout
         if ($row && password_verify($mypassword, $row['password'])) {
             $_SESSION['username'] = $row['username'];
             $_SESSION['user_id'] = $row['id'];
@@ -44,10 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }).then(response => response.json())
                     .then(data => {
                         console.log('Cart synced with server:', data);
-                        window.location.href = 'check.php';
+                        const previousPage = '" . (isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : 'shop.php') . "';
+                        window.location.href = previousPage;
                     }).catch(error => {
                         console.error('Error syncing cart:', error);
-                        window.location.href = 'check.php';
+                        window.location.href = '" . (isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : 'check.php') . "';
                     });
                 </script>";
             exit();
@@ -63,63 +67,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/form.css">
 </head>
 <body>
 
-    <header>
-        <a href="index.php" class="logo">Time<span>Piece</span></a>
-        <div class="hamburger" id="hamburger">
-            &#9776;
-        </div>
-        
-        <nav id="nav-menu">
-            <div class="close" id="close">
-                &times;
+
+    <div class="login_container">
+        <form action="" method="post">
+            <h2 class="text-center">Login Here</h2>
+
+            <?php if (isset($_GET['error'])) { ?>
+                <p class="error"><?php echo $_GET['error']; ?></p>
+            <?php }?>
+
+            <label for="username">Username</label>
+            <input type="text" name="username">
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="myInput">
+
+            <div>
+                <input type="checkbox" id="showPassword" onclick="togglePassword()">
+                <label for="showPassword">Show Password</label>
             </div>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="shop.php">Shop</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php" class="login active">Login</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <div class="logincontainer">
-    <form action="" method="post">
-        <h2>Login Here</h2>
+            <button type="submit" name="login" class="submitbtn"><span class="btn-text">Login</span></button>
 
-        <?php if (isset($_GET['error'])) { ?>
-            <p class="error"><?php echo $_GET['error']; ?></p>
-        <?php }?>
+            <p class="check">Don't have an account? <a href="signup.php"><span class="acc">Register</span></a></p>
 
-        <label for="username">Username</label>
-        <input type="text" name="username" required>
+            <p class="demo">Demo Account: <strong>demo</strong> | <strong>Demo@123</strong></p>
+        </form>
+    </div>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="myInput" required>
+    <?php include 'includes/footer.php'; ?>
 
-        <div>
-            <input type="checkbox" id="showPassword" onclick="togglePassword()">
-            <label for="showPassword">Show Password</label>
-        </div>
-
-        <button type="submit" name="login" class="submitbtn">Login</button>
-
-        <p class="check">Don't have an account? <a href="signup.php">Register</a></p>
-
-        <p class="demo">Demo Account: <strong>demo</strong> | <strong>Demo@123</strong></p>
-    </form>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -136,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             .then(data => {
                 const cart = data.cart;
                 localStorage.setItem(`cart_${username}`, JSON.stringify(cart));
-                updateCartSidebar(); // Your existing function to update the cart UI
+                updateCartSidebar();
             }).catch(error => {
                 console.error('Error fetching cart from database:', error);
             });
