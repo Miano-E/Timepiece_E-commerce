@@ -41,4 +41,4 @@ To run this project locally, follow these steps:
 -For support or inquiries, feel free to reach out via email at mianoedwin007@gmail.com.
 
 ## Live Demo
--Visit https://edwinmiano.co.ke/index.php for a live demo.
+-Visit https://edwin.infinityfreeapp.com/home.php for a live demo.
